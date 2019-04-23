@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'springboot-mongodb-quartz-cluster'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-devtools")
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test') {
+        exclude(module: 'commons-logging')
+    }
+    compile group: 'org.springframework', name: 'spring-context-support'
+    compile 'org.springframework:spring-context-support'  // setup quartz beans
+    compile 'org.springframework:spring-tx' // transaction support required by quartz
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb'
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+    compile group: 'com.novemberain', name: 'quartz-mongodb', version: '2.1.0'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    compile group: 'joda-time', name: 'joda-time', version: '2.10'
+
+}
+
+

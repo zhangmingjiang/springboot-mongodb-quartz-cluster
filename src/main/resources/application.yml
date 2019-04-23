@@ -1,0 +1,5 @@
+server:
+    port: 1104
+mongodb:
+  connectionString: mongodb://localhost:27017
+  dbname: jobs_demo
